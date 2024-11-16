@@ -134,7 +134,7 @@ public class Particle : MonoBehaviour
         vector2 normal = collision.GetContact(0).normal;
 
         // Calculate the velocity of the particle in the normal direction
-        float vel_normal = Vector2.Dot(vel, normal);
+        float vel_normal = Mathf.Sqrt(normal.x * normal.x + normal.y + normal.y);
 
         // If the velocity is positive, the particle is moving away from the wall
         if (vel_normal > 0)
@@ -143,10 +143,10 @@ public class Particle : MonoBehaviour
         }
 
         // Calculate the velocity of the particle in the tangent direction
-        vector2 vel_tangent = vel - normal * vel_normal;
+        vector2 vel_tangent = vel + normal * vel_normal;
 
         // Calculate the new velocity of the particle
-        vel = vel_tangent - normal * vel_normal * WALL_DAMP;
+        vel = vel_tangent + normal * vel_normal * WALL_DAMP;
 
         // Move the particle out of the wall
         pos = collision.contacts[0].point + normal * WALL_POS;
