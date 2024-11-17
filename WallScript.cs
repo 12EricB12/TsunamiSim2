@@ -29,8 +29,7 @@ public class WallScript : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision!");
-     //   Debug.Log(collision.gameObject.GetComponent<WaterScript>().getForce());
+        //Debug.Log("Collision!");
         float deltaTime = 0.017f; // should be framerate
         // speed = collision.gameObject.GetComponent<WaterScript>().rb.linearVelocity.magnitude;
         //Debug.Log(speed);
@@ -44,7 +43,7 @@ public class WallScript : MonoBehaviour
         red = map(force, 0, MAXFORCE, 0, 255); // maps the amount of force to the red function
 
         sr.color = new Color(1,1-red/255,1-red/255); // color will deviate from white becoming increasingly red as red (variable) gets larger
-        Debug.Log(red);
+        //Debug.Log(red);
     }
     
     // map function from Arduino.cc
