@@ -6,9 +6,9 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using list = System.Collections.Generic.List<Particle>;
 
-public class Water : MonoBehaviour
+public class Simulation : MonoBehaviour
 {
-    static readonly int n = 100;
+    static readonly int n = 102;
     static readonly int posRange = 10;
     public list particles = new list();
     public Rigidbody2D[] molecules = new Rigidbody2D[n];

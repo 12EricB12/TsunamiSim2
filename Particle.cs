@@ -87,7 +87,6 @@ public class Particle : MonoBehaviour
 
         // Update visual position
         visual_pos = pos;
-        transform.position = visual_pos;
 
         // Reset force
         force = new vector2(0, -G);
