@@ -27,15 +27,15 @@ public class Shower : MonoBehaviour
                 return;
             }
             // Create a new particle at the current position of the object
-            GameObject new_particle = Instantiate(Base_Particle, transform.position, Quaternion.identity);
+            GameObject new_particle = Instantiate(Base_Particle, Simulation.transform.position, Quaternion.identity);
 
             // update the particle's position
-            new_particle.GetComponent<Particle>().pos = transform.position;
+            new_particle.GetComponent<Particle>().pos = Simulation.transform.position;
             new_particle.GetComponent<Particle>().previous_pos = transform.position;
             new_particle.GetComponent<Particle>().visual_pos = transform.position;
-            new_particle.GetComponent<Particle>().vel = init_speed;
+            new_particle.GetComponent<Particle>().vel = new Vector2(UnityEngine.Random.Range(-1, 1), 0);
 
-            Rigidbody2D collider = new_particle.AddComponent<Rigidbody2D>();
+            new_particle.AddComponent<Rigidbody2D>();
 
             // Set as child of the Simulation object
             new_particle.transform.parent = Simulation.transform;

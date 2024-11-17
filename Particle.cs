@@ -143,7 +143,7 @@ public class Particle : MonoBehaviour
         }
 
         // Calculate the velocity of the particle in the tangent direction
-        vector2 vel_tangent = vel + normal * vel_normal;
+        vector2 vel_tangent = vel - normal * vel_normal;
 
         // Calculate the new velocity of the particle
         vel = vel_tangent + normal * vel_normal * WALL_DAMP;
@@ -151,5 +151,4 @@ public class Particle : MonoBehaviour
         // Move the particle out of the wall
         pos = collision.contacts[0].point + normal * WALL_POS;
     }
-
 }
