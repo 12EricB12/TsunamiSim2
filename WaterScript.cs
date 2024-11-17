@@ -10,7 +10,7 @@ public class WaterScript : MonoBehaviour {
     }
 
     void Start() {
-        rb.linearVelocity = new Vector2(6f,0f); // initialize velocity of particle
+        // rb.linearVelocity = new Vector2(6f,0f); // initialize velocity of particle
     }
 
     void Update() {
@@ -19,7 +19,7 @@ public class WaterScript : MonoBehaviour {
     void onCollisionEnter2D(Collision2D collision) {
         Debug.Log("Water Collision!");
         float deltaTime = 0.017f; // should be framerate
-        speed = rb.linearVelocity.magnitude;
+        // speed = rb.linearVelocity.magnitude;
         Debug.Log(speed);
         force = 2*(rb.mass * speed)/(deltaTime);
     }

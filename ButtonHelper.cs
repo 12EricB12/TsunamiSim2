@@ -7,6 +7,7 @@ public class ButtonHelper : MonoBehaviour
 {
     private bool stop = false;
     public Shower shower;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,15 @@ public class ButtonHelper : MonoBehaviour
     }
 
     public void OnClick() {
-        if (!stop)
-        {
-            shower.Execute();
-            stop = true;
-        }
+        shower.Execute();
     }
+
+    //public void RecieveInput(string name, float input) {
+    //    if (input == null) {
+    //        return;
+    //    }
+
+    //    if (name == "Magnitude") shower.magnitude = input;
+    //    if (name == "Depth") shower.depth = input;
+    //}
 }

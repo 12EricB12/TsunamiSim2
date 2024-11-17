@@ -73,7 +73,6 @@ public class Particle : MonoBehaviour
         visual_pos = pos;
     }
 
-    // Update is called once per frame
     public void UpdateState()
     {
         // Reset previous position
@@ -109,16 +108,6 @@ public class Particle : MonoBehaviour
 
         // Reset neighbors
         neighbours = new list();
-
-        // If pos under BOTTOM, delete particle
-        //if (pos.y < BOTTOM)
-        //{
-        //    // If name not Base_Particle, delete particle
-        //    //if (name != "Base_Particle")
-        //    //{
-        //        Destroy(gameObject);
-        //    //}
-        //}
     }
 
     public void CalculatePressure()
@@ -133,7 +122,7 @@ public class Particle : MonoBehaviour
         vector2 normal = collision.GetContact(0).normal;
 
         // Calculate the velocity of the particle in the normal direction
-        float vel_normal = Mathf.Sqrt(normal.x * normal.x + normal.y + normal.y);
+        float vel_normal = vector2.Dot(vel, normal);
 
         // If the velocity is positive, the particle is moving away from the wall
         if (vel_normal > 0)
@@ -145,7 +134,7 @@ public class Particle : MonoBehaviour
         vector2 vel_tangent = vel - normal * vel_normal;
 
         // Calculate the new velocity of the particle
-        vel = vel_tangent + normal * vel_normal * WALL_DAMP;
+        vel = vel_tangent - normal * vel_normal * WALL_DAMP;
 
         // Move the particle out of the wall
         pos = collision.contacts[0].point + normal * WALL_POS;

@@ -8,7 +8,7 @@ using list = System.Collections.Generic.List<Particle>;
 
 public class Simulation : MonoBehaviour
 {
-    static readonly int n = 102;
+    static readonly int n = 100;
     static readonly int posRange = 10;
     public list particles = new list();
     public Rigidbody2D[] molecules = new Rigidbody2D[n];
@@ -269,37 +269,5 @@ public class Simulation : MonoBehaviour
                 }
             }
         }
-    }
-
-
-    // Not chat GPTed
-    private Sprite CreateCircleSprite()
-    {
-        Texture2D texture = new Texture2D(64, 64, TextureFormat.ARGB32, false);
-        texture.filterMode = FilterMode.Bilinear;
-
-        // Draw a filled circle on the texture
-        Color fillColor = Color.white;
-        Color[] pixels = texture.GetPixels();
-
-        for (int x = 0; x < texture.width; x++)
-        {
-            for (int y = 0; y < texture.height; y++)
-            {
-                // Convert pixel position to normalized [-1, 1] space
-                float dx = (x - texture.width / 2f) / (texture.width / 2f);
-                float dy = (y - texture.height / 2f) / (texture.height / 2f);
-                float distance = Mathf.Sqrt(dx * dx + dy * dy);
-
-                // Set pixels inside the circle to the fill color, others to transparent
-                pixels[y * texture.width + x] = distance <= 1f ? fillColor : Color.clear;
-            }
-        }
-
-        texture.SetPixels(pixels);
-        texture.Apply();
-
-        // Create and return a Sprite from the texture
-        return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new UnityEngine.Vector2(0.5f, 0.5f));
     }
 }

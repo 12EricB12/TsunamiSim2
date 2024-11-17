@@ -32,7 +32,7 @@ public class WallScript : MonoBehaviour
         Debug.Log("Collision!");
      //   Debug.Log(collision.gameObject.GetComponent<WaterScript>().getForce());
         float deltaTime = 0.017f; // should be framerate
-        speed = collision.gameObject.GetComponent<WaterScript>().rb.linearVelocity.magnitude;
+        // speed = collision.gameObject.GetComponent<WaterScript>().rb.linearVelocity.magnitude;
         //Debug.Log(speed);
         force += 2*(collision.gameObject.GetComponent<WaterScript>().rb.mass * speed)/(deltaTime);
 
