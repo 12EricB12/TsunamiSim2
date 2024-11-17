@@ -17,9 +17,9 @@ public class ParticleColor : MonoBehaviour
     void Update()
     {
         // colour of particle becomes more red at a higher velocity
-        // Vector2 vel = rb.linearVelocity;
-        //float scaledVel = vel.magnitude * scaleFactor / 256;
-        //sr.color = new Color(scaledVel, 0f, 1 - scaledVel, 1);
+        Vector2 vel = rb.velocity;
+        float scaledVel = vel.magnitude * scaleFactor / 256;
+        sr.color = new Color(scaledVel, 0.3f, 1 - scaledVel, 1);
     }
 
 }
