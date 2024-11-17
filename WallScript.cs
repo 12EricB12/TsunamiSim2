@@ -30,11 +30,10 @@ public class WallScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision!");
-     //   Debug.Log(collision.gameObject.GetComponent<WaterScript>().getForce());
         float deltaTime = 0.017f; // should be framerate
-        speed = collision.gameObject.GetComponent<WaterScript>().rb.linearVelocity.magnitude;
-        //Debug.Log(speed);
-        force += 2*(collision.gameObject.GetComponent<WaterScript>().rb.mass * speed)/(deltaTime);
+        speed = collision.gameObject.GetComponent<Particle>().velocity;
+        // mass of particle assumed to be 1 kg
+        force += 2*(speed)/(deltaTime);
 
         // if max force > 2000, we will map as if F = 2000
         if (force >= MAXFORCE) {
