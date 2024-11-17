@@ -25,7 +25,7 @@ public class Shower : MonoBehaviour
     private float speed;
     private float g = 9.81f;
     private int n;
-    private bool runScript = true;
+    private bool runScript = false;
     private bool instantized = false;
     private bool stopped = false;
     private float time;
@@ -42,8 +42,8 @@ public class Shower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!runScript) {
-            return;
+        if (Input.GetKeyDown(KeyCode.T)) {
+            runScript = true;
         }
 
         if (!instantized && runScript)
