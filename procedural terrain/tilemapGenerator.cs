@@ -48,16 +48,16 @@ public class test : MonoBehaviour
                     dirtTilemap.SetTile(new Vector3Int(x, y, 0), dirtT);
                 }
             }
-            if (totalRockD == height)
+            if (totalRockD == height) // if the rock distance is the same as the height then generate rock
             {
                 rockTilemap.SetTile(new Vector3Int(x, height, 0), rockT);
             }
-            else
+            else // if the rock distance is not the same as the height then generate grass
             {
                 grassTilemap.SetTile(new Vector3Int(x, height, 0), grassT);
             }
 
-            if(height < 0)
+            if(height < 0) // if y drops below 0 then make a flat ground
             {
                 grassTilemap.SetTile(new Vector3Int(x, 0, 0), grassT);
             }
