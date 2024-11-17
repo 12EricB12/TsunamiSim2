@@ -24,6 +24,7 @@ public class Shower : MonoBehaviour
     private int n;
     private bool runScript = true;
     private bool instantized = false;
+    private bool stopped = false;
     private float time;
     // Start is called before the first frame update
     void Start()
@@ -85,6 +86,11 @@ public class Shower : MonoBehaviour
             Debug.Log("Pos: " + child.transform.position);
             Debug.Log("Particle: " + child.GetComponent<Particle>().pos);
 
+            if (stopped == true) {
+                child.GetComponent<Particle>().vel = new Vector2(child.GetComponent<Particle>().vel.x + speed * Time.deltaTime, child.GetComponent<Particle>().vel.y + speed * Time.deltaTime);
+                stopped = false;
+            }
+
             child.transform.position = child.GetComponent<Particle>().pos;
             child.transform.parent = Simulation.transform;
 
@@ -104,7 +110,8 @@ public class Shower : MonoBehaviour
     {
         speed = (float)Math.Sqrt(g * depth * 0.01); // Equation for the speed of a tsunami
         BoxCollider2D collider = TsunamiWall.GetComponent<BoxCollider2D>();
-        if (collider.transform.position.x >= -10) {
+        if (collider.transform.position.x >= 0) {
+            stopped = true;
             return;
         }
 

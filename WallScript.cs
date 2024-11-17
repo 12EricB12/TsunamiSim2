@@ -33,7 +33,7 @@ public class WallScript : MonoBehaviour
         float deltaTime = 0.017f; // should be framerate
         // speed = collision.gameObject.GetComponent<WaterScript>().rb.linearVelocity.magnitude;
         //Debug.Log(speed);
-        force += 2*(collision.gameObject.GetComponent<WaterScript>().rb.mass * speed)/(deltaTime);
+        force += 2*(collision.gameObject.GetComponent<Particle>().mass * speed)/(deltaTime);
 
         // if max force > 2000, we will map as if F = 2000
         if (force >= MAXFORCE) {
