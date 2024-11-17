@@ -2,7 +2,7 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using TMPro.Examples;
+// using TMPro.Examples;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -27,17 +27,17 @@ public class test : MonoBehaviour
 
     void Generate()
     {
-        for(int x = 0; x < width; x++) // generate in the x-axis
+        for(int x = -12; x < width; x++) // generate in the x-axis
         {
             //deterines the height of the terrain
-            height = Mathf.RoundToInt(changeInHeight * Mathf.PerlinNoise(x / smooth, 0));
+            height = Mathf.RoundToInt(changeInHeight * Mathf.PerlinNoise(x / smooth, 0)) - 4;
 
             //determines the depth of the rock between the dirt
             int minRockD = height - minimumRockHeight;
             int maxRockD = height - maximumRockHeight;
             int totalRockD = Random.Range(minRockD,maxRockD);
 
-            for (int y = 0; y < height; y++) //generate in the y-axis
+            for (int y = -8; y < height; y++) //generate in the y-axis
             {
                 if (y < totalRockD) // generate rock if below a certain height y
                 {
@@ -57,10 +57,10 @@ public class test : MonoBehaviour
                 grassTilemap.SetTile(new Vector3Int(x, height, 0), grassT);
             }
 
-            if(height < 0) // if y drops below 0 then make a flat ground
-            {
-                grassTilemap.SetTile(new Vector3Int(x, 0, 0), grassT);
-            }
+            //if(height < 0) // if y drops below 0 then make a flat ground
+            //{
+            //    grassTilemap.SetTile(new Vector3Int(x, 0, 0), grassT);
+            //}
         }
     }
 }

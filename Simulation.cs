@@ -111,32 +111,32 @@ public class Simulation : MonoBehaviour
         time = Time.realtimeSinceStartup;
         foreach (Particle p in particles)
         {
-            p.UpdateState();
+            // p.UpdateState();
         }
 
         time = Time.realtimeSinceStartup - time;
         //Debug.Log("Time to update particles: " + time);
 
         time = Time.realtimeSinceStartup;
-        calculate_density(particles);
+        // calculate_density(particles);
         time = Time.realtimeSinceStartup - time;
         //Debug.Log("Time to calculate density: " + time);
 
         time = Time.realtimeSinceStartup;
         foreach (Particle p in particles)
         {
-            p.CalculatePressure();
+            // p.CalculatePressure();
         }
         time = Time.realtimeSinceStartup - time;
         //Debug.Log("Time to calculate pressure: " + time);
 
         time = Time.realtimeSinceStartup;
-        create_pressure(particles);
+        // create_pressure(particles);
         time = Time.realtimeSinceStartup - time;
         //Debug.Log("Time to create pressure: " + time);
 
         time = Time.realtimeSinceStartup;
-        calculate_viscosity(particles);
+        // calculate_viscosity(particles);
         time = Time.realtimeSinceStartup - time;
         //Debug.Log("Time to calculate viscosity: " + time);
     }

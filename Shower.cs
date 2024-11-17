@@ -6,6 +6,9 @@ using UnityEngine;
 
 using vector2 = UnityEngine.Vector2;
 
+// Credit to Alexandre Sajus for the majority of the code
+// https://github.com/AlexandreSajus/Unity-Fluid-Simulation/tree/main
+
 public class Shower : MonoBehaviour
 {
     // Get the Simulation object
@@ -15,8 +18,8 @@ public class Shower : MonoBehaviour
     public GameObject TsunamiWall;
     public Vector2 init_speed = new Vector2(1.0f, 0.0f);
     public float spawn_rate = 0.001f;
-    public float depth = 10;
-    public int magnitude = 20;
+    public float depth = 20;
+    public int magnitude = 10;
 
     private float accel = 5f;
     private float speed;
@@ -29,7 +32,8 @@ public class Shower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        n = magnitude * 5;
+        n = magnitude * 50;
+        speed = (float) Math.Sqrt(g * depth);
         TsunamiWall = GameObject.Find("TsunamiWall");
         Simulation = GameObject.Find("Simulation");
         Base_Particle = GameObject.Find("Base_Particle");
@@ -50,13 +54,14 @@ public class Shower : MonoBehaviour
                 time += Time.deltaTime;
 
                 // Create a new particle at the current position of the object
-                GameObject new_particle = Instantiate(Base_Particle, new Vector2(-15 + (float)(0.1) * i, 0), Quaternion.identity);
+                GameObject new_particle = Instantiate(Base_Particle, new Vector2(-13 + (float)(0.15/n * i), 0f), Quaternion.identity);
 
                 // update the particle's position
                 new_particle.GetComponent<Particle>().pos = new_particle.transform.position;
                 new_particle.GetComponent<Particle>().vel = init_speed;
 
-                new_particle.AddComponent<Rigidbody2D>();
+                Rigidbody2D rb = new_particle.AddComponent<Rigidbody2D>();
+                rb.velocity = new Vector2(rb.velocity.x + speed * 1.5f, rb.velocity.y + speed/3);
 
                 // Set as child of the Simulation object
                 new_particle.transform.parent = Simulation.transform;
@@ -68,13 +73,9 @@ public class Shower : MonoBehaviour
             instantized = true;
         }
 
-        StartBlock();
-
         // Limit the number of particles
         foreach (Transform child in Simulation.GetComponentsInChildren<Transform>())
         {
-            Debug.Log("B");
-
             if (child.gameObject == Simulation || child.gameObject == Base_Particle) {
                 continue;
             }
@@ -83,15 +84,10 @@ public class Shower : MonoBehaviour
             //child.GetComponent<Particle>().pos = transform.position;
             //child.GetComponent<Particle>().vel = init_speed;
 
-            Debug.Log("Pos: " + child.transform.position);
-            Debug.Log("Particle: " + child.GetComponent<Particle>().pos);
+            Rigidbody2D rb = child.GetComponent<Rigidbody2D>();
 
-            if (stopped == true) {
-                child.GetComponent<Particle>().vel = new Vector2(child.GetComponent<Particle>().vel.x + speed * Time.deltaTime, child.GetComponent<Particle>().vel.y + speed * Time.deltaTime);
-                stopped = false;
-            }
+            // child.GetComponent<Particle>().vel = new Vector2(child.GetComponent<Particle>().vel.x + speed * Time.deltaTime, child.GetComponent<Particle>().vel.y + speed * Time.deltaTime);
 
-            child.transform.position = child.GetComponent<Particle>().pos;
             child.transform.parent = Simulation.transform;
 
             // Reset time
